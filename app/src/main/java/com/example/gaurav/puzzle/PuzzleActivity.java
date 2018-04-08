@@ -1,5 +1,9 @@
 package com.example.gaurav.puzzle;
 
+import android.media.MediaPlayer;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Context;
@@ -80,11 +84,37 @@ public class PuzzleActivity extends AppCompatActivity {
         shufflebutton=(Button)findViewById(R.id.shuffle_button);
          solvebutton=(Button)findViewById(R.id.solve_button);
 
+        PreferenceManager.setDefaultValues(this,R.xml.settings_screen,false);
+
        shufflebutton.setEnabled(false);
         solvebutton.setEnabled(false);
+        MediaPlayer m= MediaPlayer.create(this,R.raw.puzzles);
+        //m.start();
+        m.setLooping(true);
 
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_puzzle, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Intent i=new Intent(PuzzleActivity.this,SettingsActivity.class);
+            startActivity(i);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -286,6 +316,14 @@ public class PuzzleActivity extends AppCompatActivity {
     {
         finish();
 
+    }
+    public static class SettingsScreen extends PreferenceFragment{
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.settings_screen);
+
+        }
     }
 
 

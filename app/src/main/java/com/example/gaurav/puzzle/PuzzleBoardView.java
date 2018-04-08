@@ -97,7 +97,7 @@ public class PuzzleBoardView extends View {
                         if (puzzleBoard.resolved()) {
                             TextView textView=(TextView)findViewById(R.id.timer);
                             //textView.setText("done!");
-                            textView.setVisibility(INVISIBLE);
+//                            textView.setVisibility(INVISIBLE);
                             Toast toast = Toast.makeText(activity, "Congratulations!", Toast.LENGTH_LONG);
                             toast.show();
 
